@@ -25,14 +25,17 @@ parkApp.config = () => {
     firebase.initializeApp(config);
 
     const parkAppFirebaseRef = firebase.app().database().ref();
-    parkAppFirebaseRef.once('value')
-        .then(function (snap) {
-            parkApp.parks = snap.val();
-            // console.log(parkApp.parks);
-            // call the next function here
-            parkApp.displayList();
-        })
-
+    // parkAppFirebaseRef.once('value')
+    //     .then(function (snap) {
+    //         parkApp.parks = snap.val();
+    //         // console.log(parkApp.parks);
+    //         // call the next function here
+    //         parkApp.displayList();
+    //     })
+    parkAppFirebaseRef.on('value', (snapshot)=>{
+        parkApp.parks = snapshot.val()
+        parkApp.displayList();
+    })
     //call loadmap and loadweather with pseudo state variables 
 }
 
@@ -56,8 +59,13 @@ parkApp.select = () => {
     })
 }
 
-// Define all variables, name, lat, lng, classification, opening day, closing day, notes, address, all from selected option
-
+parkApp.geolocation = () => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+        console.log(position);
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+    });    
+};
 
 parkApp.loadMap = (lat = 43.6565336, lng = -79.3910906) => {
     const mapOptions = {
@@ -69,11 +77,10 @@ parkApp.loadMap = (lat = 43.6565336, lng = -79.3910906) => {
         zoom: 10
     }
 
-    // const mapDiv = document.getElementById('map');	
     const mapDiv = $('.map')[0];
-    console.log(mapDiv)
+   
     parkApp.map = new google.maps.Map(mapDiv, mapOptions);
-    console.log(parkApp.map)
+
     const marker = new google.maps.Marker({
              position: mapOptions.center,
            });
@@ -121,6 +128,7 @@ parkApp.getWeather = (lat = 43.6565336, lng = -79.3910906) => {
 parkApp.init = () => {
     // console.log('hey')
     parkApp.config();
+    parkApp.geolocation();
     parkApp.select();
     parkApp.getWeather();
     parkApp.displayWeather();
