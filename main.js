@@ -64,7 +64,9 @@ parkApp.geolocation = () => {
         console.log(position);
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
-    });    
+    }); 
+    
+    
 };
 
 parkApp.loadMap = (lat = 43.6565336, lng = -79.3910906) => {
@@ -133,7 +135,7 @@ parkApp.init = () => {
     parkApp.getWeather();
     parkApp.displayWeather();
     parkApp.displayInfo();
-    parkApp.loadMap();
+    // parkApp.loadMap();
 
 }
 
