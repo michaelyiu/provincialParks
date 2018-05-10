@@ -13,7 +13,7 @@ parkApp.displayList = () => {
 };
 
 parkApp.config = async () => {
-
+    //retrieving all firebase information 
     const config = {
         apiKey: "AIzaSyD20JLqE4tFouRUW8KXOLzTe_8nSwBOVg4",
         authDomain: "provincialparks-12adb.firebaseapp.com",
@@ -33,9 +33,9 @@ parkApp.config = async () => {
             parkApp.displayList();
         })
 
-    
+    parkApp.markers = null;
+
     await parkApp.geolocation();
-        console.log(parkApp.latitude);
     //call loadmap and loadweather with pseudo state variables 
 }
 
@@ -43,19 +43,26 @@ parkApp.geolocation = (callback) => {
     let promise = new Promise(function (resolve, reject) {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
+                
                 function (position) {
                     parkApp.latitude = position.coords.latitude;
                     parkApp.longitude = position.coords.longitude;
+                    
+                    //defining geolocation marker 
+                    parkApp.geolocationMarker = new google.maps.Marker({
+                        position: {
+                            lat: parkApp.latitude, 
+                            lng: parkApp.longitude
+                        },
+                        map: parkApp.map
+                    });
+
                     resolve(position.coords.latitude + "," + position.coords.longitude)
                 });
         } else {
             reject("Unknown");
         }
-        console.log("reached");
-
     });
-    console.log("promise: " + promise);
-
     return promise;
 };
 
@@ -63,8 +70,14 @@ parkApp.geolocation = (callback) => {
 
 
 parkApp.select = () => {
-    // console.log('select called')
     $('#provParks').on('change', function () {
+
+        //clearing the park marker each time a new park is selected
+        if (parkApp.markers != null) {
+            parkApp.markers.setMap(null);
+        }        
+
+
         const selectedPark = $(this).find(':selected').val();
         console.log(selectedPark);
         const selectedParkInfo = parkApp.parks.filter((park) => {
@@ -72,35 +85,35 @@ parkApp.select = () => {
                 return park
             };
         })
-        console.log(selectedParkInfo[0].Lat, selectedParkInfo[0].Lng)
+     
         parkApp.getWeather(selectedParkInfo[0].Lat, selectedParkInfo[0].Lng);
 
         parkApp.displayInfo(selectedParkInfo[0].Name, selectedParkInfo[0].Address, selectedParkInfo[0].Contact, selectedParkInfo[0].Classification, selectedParkInfo[0]['Opening Day'], selectedParkInfo[0]['Closing Day'], selectedParkInfo[0].Notes)
 
+        //defining the parks locaiton marker     
+        parkApp.markers = new google.maps.Marker({
+            position: {
+                lat: selectedParkInfo[0].Lat,
+                lng: selectedParkInfo[0].Lng
+            },
+            map: parkApp.map
+        });
 
+        //making both markers appear on the same window 
         let bounds = new google.maps.LatLngBounds();
-
         
         let markers = [
-            [parkApp.latitude, parkApp.longitude],
-            [selectedParkInfo[0].Lat, selectedParkInfo[0].Lng]];
-
-            console.log(markers.length);
-        for (i = 0; i < markers.length; i++) {
-            let position = new google.maps.LatLng(markers[i][0], markers[i][1]);
-
-            // console.log(position);  
-            bounds.extend(position);
-            let marker = new google.maps.Marker({
-                position: position,
-                map: parkApp.map,
-                // title: markers[i][0]
-            });
-            // console.log(marker.position);
-            parkApp.map.fitBounds(bounds);
-        }
-
-
+            parkApp.geolocationMarker,
+            parkApp.markers];
+            
+        let pos1 = new google.maps.LatLng(parkApp.latitude, parkApp.longitude); 
+        let pos2 = new google.maps.LatLng(selectedParkInfo[0].Lat, selectedParkInfo[0].Lng)
+           
+        bounds.extend(pos1);
+        
+        bounds.extend(pos2);
+        
+        parkApp.map.fitBounds(bounds);
     })
 }
 
@@ -108,12 +121,7 @@ parkApp.select = () => {
 
 
 parkApp.loadMap = async (lat = 43.6565336, lng = -79.3910906) => {
-    
-    // let bounds = new google.maps.LatLngBounds();
-    console.log(parkApp.latitude);
-    console.log(parkApp.latitude);
-
-    const mapOptions = {
+   const mapOptions = {
         center: {
             //enhaced object literal
             lat,
@@ -131,7 +139,7 @@ parkApp.loadMap = async (lat = 43.6565336, lng = -79.3910906) => {
 parkApp.displayInfo = (name = 'please select a park', address = '', contact = '', classification = '', opening = '', closing = '', notes = '') => {
     $('.parkInfo').html(`
 			<h1>${name}</h1>
-			<h2>${address}</h2>
+			<h2>Address: ${address}</h2>
 			<h2>Contact Info: ${contact}</h2>
 			<h3>Classification: ${classification}</h3>
 			<h3>Opening Day: ${opening}</h3>
@@ -140,29 +148,94 @@ parkApp.displayInfo = (name = 'please select a park', address = '', contact = ''
 		`)
 }
 
-parkApp.displayWeather = (temp, feels, icon, iconDes, forecast) => {
-    $('#weather').html(`
-		<h2>currently ${temp}</h2>
-		<h2>feels like ${feels}</h2>
-		<img src="${icon}" alt="${iconDes}" />
-		<img src="${forecast}" alt="" />
+parkApp.displayCurrentWeather = (temp, feels, icon, iconDes, forecast, day1Day, day1Month, day1Date, day1Conditions, day1Pop, day1Hum, day1icon, day1iconURL, day2Day, day2Month, day2Date, day2Pop, day2Conditions, day2Hum, day2icon, day2iconURL, day3Day, day3Month, day3Date, day3Pop, day3Conditions, day3Hum, day3icon, day3iconURL) => {
+    $('#weather').empty();
+    $('#weather').append(`
+		<div class="currentWeather">
+		    <h2>currently ${temp}</h2>
+    		<h2>feels like ${feels}</h2>
+    		<img src="${icon}" alt="${iconDes}" />
+    		<a href="${forecast}">See full forecast here</a>
+        </div>
+        <div class="day1">
+            <h2>${day1Day}, ${day1Month}, ${day1Date}</h2> 
+            <h2>${day1Conditions}, ${day1Pop}, ${day1Hum}</h2>
+            <img src="${day1iconURL}" alt="${day1icon}"/> 
+        </div>
+        <div className="day2">
+            <h2>${day2Day}, ${day2Month}, ${day2Date}</h2> 
+            <h2>${day2Conditions}, ${day2Pop}, ${day2Hum}</h2>
+            <img src="${day2iconURL}" alt="${day2icon}"/> 
+        </div>
+        <div className="day3">
+            <h2>${day3Day}, ${day3Month}, ${day3Date}</h2> 
+            <h2>${day3Conditions}, ${day3Pop}, ${day3Hum}</h2>
+            <img src="${day3iconURL}" alt="${day3icon}"/>  
+        </div>
 		`)
 }
+
 
 parkApp.getWeather = (lat = 43.6565336, lng = -79.3910906) => {
     // console.log(lat, lng, 'getweather');
     $.ajax({
         url: `http://api.wunderground.com/api/7df53cd529eab04d/conditions/q/${lat},${lng}.json`,
         method: 'GET',
-        dataType: 'json',
+        dataType: 'json'
     }).then((res) => {
-        console.log(res);
-        const feels = res.current_observation.feelslike_c
-        const icon = res.current_observation.icon_url
-        const iconDes = res.current_observation.icon
-        const temp = res.current_observation.temp_c
-        const forecast = res.current_observation.forecast_url
-        parkApp.displayWeather(temp, feels, icon, iconDes, forecast);
+        // console.log(res);
+        parkApp.feels = res.current_observation.feelslike_c
+        parkApp.icon = res.current_observation.icon_url
+        parkApp.iconDes = res.current_observation.icon
+        parkApp.temp = res.current_observation.temp_c
+        parkApp.forecast = res.current_observation.forecast_url
+        // parkApp.displayCurrentWeather(temp, feels, icon, iconDes, forecast);
+    })
+
+    //retrieving forecast 
+    $.ajax({
+        url: `http://api.wunderground.com/api/7df53cd529eab04d/forecast/q/${lat},${lng}.json`,
+        method: 'GET',
+        dataType: 'json' 
+    }).then((res2) => {
+        console.log(res2)
+        //forecast day 1
+        const day1 = res2.forecast.simpleforecast.forecastday[1];
+        const day1Day = day1.date.weekday_short;
+        const day1Month = day1.date.monthname;
+        const day1Date = day1.date.day;
+        const day1Conditions = day1.conditions;
+        const day1Pop = day1.pop;
+        const day1Hum = day1.avehumidity
+        const day1icon = day1.icon
+        const day1iconURL = day1.icon_url 
+        // console.log(day1Day, day1Month, day1Date, day1Conditions, day1Pop, day1Hum, day1icon, day1iconURL);
+
+        //forecast day 2 
+        const day2 = res2.forecast.simpleforecast.forecastday[2];
+        const day2Day = day2.date.weekday_short;
+        const day2Month = day2.date.monthname;
+        const day2Date = day2.date.day;
+        const day2Conditions = day2.conditions;
+        const day2Pop = day2.pop;
+        const day2Hum = day2.avehumidity
+        const day2icon = day2.icon
+        const day2iconURL = day2.icon_url 
+        // console.log(day2Day, day2Month, day2Date, day2Pop, day2Conditions, day2Hum, day2icon, day2iconURL);
+
+        //forecast day 3
+        const day3 = res2.forecast.simpleforecast.forecastday[3];
+        const day3Day = day3.date.weekday_short;
+        const day3Month = day3.date.monthname;
+        const day3Date = day3.date.day;
+        const day3Conditions = day3.conditions;
+        const day3Pop = day3.pop;
+        const day3Hum = day3.avehumidity
+        const day3icon = day3.icon
+        const day3iconURL = day3.icon_url
+        // console.log(day3Day, day3Month, day3Date, day3Pop, day3Conditions, day3Hum, day3icon, day3iconURL);
+
+        parkApp.displayCurrentWeather(parkApp.temp, parkApp.feels, parkApp.icon, parkApp.iconDes, parkApp.forecast, day1Day, day1Month, day1Date, day1Conditions, day1Pop, day1Hum, day1icon, day1iconURL, day2Day, day2Month, day2Date, day2Pop, day2Conditions, day2Hum, day2icon, day2iconURL, day3Day, day3Month, day3Date, day3Pop, day3Conditions, day3Hum, day3icon, day3iconURL);
     })
 }
 
@@ -171,14 +244,13 @@ parkApp.init = () => {
     parkApp.config();
     parkApp.select();
     parkApp.getWeather();
-    parkApp.displayWeather();
+    parkApp.displayCurrentWeather();
+    // parkApp.displayForecast();
     parkApp.displayInfo();
-    // parkApp.loadMap();
+    parkApp.loadMap();
 
 }
 
-
 $(function () {
     parkApp.init();
-
 });
