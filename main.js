@@ -12,7 +12,7 @@ parkApp.displayList = () => {
     })
 };
 
-parkApp.config = () => {
+parkApp.config = async () => {
 
     const config = {
         apiKey: "AIzaSyD20JLqE4tFouRUW8KXOLzTe_8nSwBOVg4",
@@ -25,19 +25,42 @@ parkApp.config = () => {
     firebase.initializeApp(config);
 
     const parkAppFirebaseRef = firebase.app().database().ref();
-    // parkAppFirebaseRef.once('value')
-    //     .then(function (snap) {
-    //         parkApp.parks = snap.val();
-    //         // console.log(parkApp.parks);
-    //         // call the next function here
-    //         parkApp.displayList();
-    //     })
-    parkAppFirebaseRef.on('value', (snapshot)=>{
-        parkApp.parks = snapshot.val()
-        parkApp.displayList();
-    })
+    parkAppFirebaseRef.once('value')
+        .then(function (snap) {
+            parkApp.parks = snap.val();
+            // console.log(parkApp.parks);
+            // call the next function here
+            parkApp.displayList();
+        })
+
+    
+    await parkApp.geolocation();
+        console.log(parkApp.latitude);
     //call loadmap and loadweather with pseudo state variables 
 }
+
+parkApp.geolocation = (callback) => {
+    let promise = new Promise(function (resolve, reject) {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    parkApp.latitude = position.coords.latitude;
+                    parkApp.longitude = position.coords.longitude;
+                    resolve(position.coords.latitude + "," + position.coords.longitude)
+                });
+        } else {
+            reject("Unknown");
+        }
+        console.log("reached");
+
+    });
+    console.log("promise: " + promise);
+
+    return promise;
+};
+
+
+
 
 parkApp.select = () => {
     // console.log('select called')
@@ -50,26 +73,46 @@ parkApp.select = () => {
             };
         })
         console.log(selectedParkInfo[0].Lat, selectedParkInfo[0].Lng)
-        parkApp.loadMap(selectedParkInfo[0].Lat, selectedParkInfo[0].Lng);
         parkApp.getWeather(selectedParkInfo[0].Lat, selectedParkInfo[0].Lng);
-        // console.log(selectedParkInfo);
-        // console.log(selectedParkInfo[0]);
+
         parkApp.displayInfo(selectedParkInfo[0].Name, selectedParkInfo[0].Address, selectedParkInfo[0].Contact, selectedParkInfo[0].Classification, selectedParkInfo[0]['Opening Day'], selectedParkInfo[0]['Closing Day'], selectedParkInfo[0].Notes)
+
+
+        let bounds = new google.maps.LatLngBounds();
+
+        
+        let markers = [
+            [parkApp.latitude, parkApp.longitude],
+            [selectedParkInfo[0].Lat, selectedParkInfo[0].Lng]];
+
+            console.log(markers.length);
+        for (i = 0; i < markers.length; i++) {
+            let position = new google.maps.LatLng(markers[i][0], markers[i][1]);
+
+            // console.log(position);  
+            bounds.extend(position);
+            let marker = new google.maps.Marker({
+                position: position,
+                map: parkApp.map,
+                // title: markers[i][0]
+            });
+            // console.log(marker.position);
+            parkApp.map.fitBounds(bounds);
+        }
+
 
     })
 }
 
-parkApp.geolocation = () => {
-    navigator.geolocation.getCurrentPosition(function (position) {
-        console.log(position);
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
-    }); 
-    
-    
-};
+// Define all variables, name, lat, lng, classification, opening day, closing day, notes, address, all from selected option
 
-parkApp.loadMap = (lat = 43.6565336, lng = -79.3910906) => {
+
+parkApp.loadMap = async (lat = 43.6565336, lng = -79.3910906) => {
+    
+    // let bounds = new google.maps.LatLngBounds();
+    console.log(parkApp.latitude);
+    console.log(parkApp.latitude);
+
     const mapOptions = {
         center: {
             //enhaced object literal
@@ -80,13 +123,9 @@ parkApp.loadMap = (lat = 43.6565336, lng = -79.3910906) => {
     }
 
     const mapDiv = $('.map')[0];
-   
-    parkApp.map = new google.maps.Map(mapDiv, mapOptions);
 
-    const marker = new google.maps.Marker({
-             position: mapOptions.center,
-           });
-    marker.setMap(parkApp.map);       
+    parkApp.map = new google.maps.Map(mapDiv, mapOptions);
+    
 }
 
 parkApp.displayInfo = (name = 'please select a park', address = '', contact = '', classification = '', opening = '', closing = '', notes = '') => {
@@ -128,9 +167,8 @@ parkApp.getWeather = (lat = 43.6565336, lng = -79.3910906) => {
 }
 
 parkApp.init = () => {
-    // console.log('hey')
+
     parkApp.config();
-    parkApp.geolocation();
     parkApp.select();
     parkApp.getWeather();
     parkApp.displayWeather();
