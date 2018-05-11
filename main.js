@@ -74,6 +74,11 @@ parkApp.geolocation = (callback) => {
 parkApp.select = () => {
     $('#provParks').on('change', function () {
 
+        //smooth scroll
+        $('html, body').animate({
+            scrollTop: $('.content').offset().top
+        }, 1000);
+
         //clearing the park marker each time a new park is selected
         if (parkApp.markers != null) {
             parkApp.markers.setMap(null);
@@ -122,14 +127,13 @@ parkApp.select = () => {
         
         
         parkApp.directionsDisplay.setMap(parkApp.map);
-        calculateAndDisplayRoute(parkApp.directionsService, parkApp.directionsDisplay, pos1, pos2);    
+        calculateAndDisplayRoute(parkApp.directionsService, parkApp.directionsDisplay, pos1, pos2);  
+        
     })
 }
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay, pos1, pos2) {
-    //if (directionsDisplay != null){
-      //  directionsDisplay.setMap(null);
-    //}
+
     directionsService.route({
         origin: pos1,
         destination: pos2,
@@ -142,10 +146,12 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pos1, po
         }
     });
 }
-// Define all variables, name, lat, lng, classification, opening day, closing day, notes, address, all from selected option
 
-
+<<<<<<< HEAD
 parkApp.loadMap = (lat = 43.6565336, lng = -79.3910906) => {
+=======
+parkApp.loadMap = async (lat, lng) => {
+>>>>>>> f3a26e83bca8190315925875e01bc30257a0fc93
    const mapOptions = {
         center: {
             //enhaced object literal
@@ -182,27 +188,33 @@ parkApp.displayCurrentWeather = (temp, feels, icon, iconDes, forecast, day1Day, 
     		<img src="${icon}" alt="${iconDes}" />
     		<a href="${forecast}">See full forecast here</a>
         </div>
-        <div class="day1">
-            <h2>${day1Day}, ${day1Month}, ${day1Date}</h2> 
-            <h2>${day1Conditions}, ${day1Pop}, ${day1Hum}</h2>
-            <img src="${day1iconURL}" alt="${day1icon}"/> 
-        </div>
-        <div className="day2">
-            <h2>${day2Day}, ${day2Month}, ${day2Date}</h2> 
-            <h2>${day2Conditions}, ${day2Pop}, ${day2Hum}</h2>
-            <img src="${day2iconURL}" alt="${day2icon}"/> 
-        </div>
-        <div className="day3">
-            <h2>${day3Day}, ${day3Month}, ${day3Date}</h2> 
-            <h2>${day3Conditions}, ${day3Pop}, ${day3Hum}</h2>
-            <img src="${day3iconURL}" alt="${day3icon}"/>  
+        <div class="forecast">
+            <div class="day1">
+                <h2>${day1Day}, ${day1Month}, ${day1Date}</h2> 
+                <h2>${day1Conditions}, ${day1Pop}, ${day1Hum}</h2>
+                <img src="${day1iconURL}" alt="${day1icon}"/> 
+            </div>
+            <div className="day2">
+                <h2>${day2Day}, ${day2Month}, ${day2Date}</h2> 
+                <h2>${day2Conditions}, ${day2Pop}, ${day2Hum}</h2>
+                <img src="${day2iconURL}" alt="${day2icon}"/> 
+            </div>
+            <div className="day3">
+                <h2>${day3Day}, ${day3Month}, ${day3Date}</h2> 
+                <h2>${day3Conditions}, ${day3Pop}, ${day3Hum}</h2>
+                <img src="${day3iconURL}" alt="${day3icon}"/>  
+            </div>
         </div>
 		`)
 }
 
 
+<<<<<<< HEAD
 parkApp.getWeather = async (lat = 43.6565336, lng = -79.3910906) => {
     // console.log(lat, lng, 'getweather');
+=======
+parkApp.getWeather = async (lat, lng) => {
+>>>>>>> f3a26e83bca8190315925875e01bc30257a0fc93
     await $.ajax({
         url: `http://api.wunderground.com/api/7df53cd529eab04d/conditions/q/${lat},${lng}.json`,
         method: 'GET',
@@ -265,14 +277,33 @@ parkApp.getWeather = async (lat = 43.6565336, lng = -79.3910906) => {
     })
 }
 
+//adding twitter widget 
+window.twttr = (function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {};
+    if (d.getElementById(id)) return t;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "https://platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+    t._e = [];
+    t.ready = function (f) {
+        t._e.push(f);
+    };
+    return t;
+}(document, "script", "twitter-wjs"));
+
 parkApp.init = () => {
 
     parkApp.loadMap();    
     parkApp.config();
     parkApp.select();
+<<<<<<< HEAD
     // parkApp.getWeather();
     // parkApp.displayCurrentWeather();
     // parkApp.displayForecast();
+=======
+>>>>>>> f3a26e83bca8190315925875e01bc30257a0fc93
     parkApp.displayInfo();
 
 }

@@ -148,42 +148,45 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 body {
   font-family: 'Raleway', sans-serif; }
 
-.wrapper {
-  width: 1040px;
-  margin: 0 auto; }
-
 header {
-  background-image: url(../images/hero.jpg);
+  background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.3)), to(rgba(0, 0, 0, 0.5))), url(../hero.jpg);
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../hero.jpg);
+  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../hero.jpg);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../hero.jpg);
   height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
   text-align: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
-  justify-content: center; }
-
-.headerContainer {
-  width: 30%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center; }
-
-h1 {
-  font-weight: 300;
-  font-size: 22px; }
+  header .headerContainer {
+    width: 70%;
+    height: 70vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: white; }
+    header .headerContainer h1 {
+      font-weight: 300;
+      font-size: 22px; }
 
 h2 {
   font-weight: 300;
@@ -192,18 +195,39 @@ h2 {
 select {
   width: 50%; }
 
-.top {
+.content {
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex; }
-
-.weather {
-  background-color: lightblue; }
-
-.parkInfo, .weather {
-  width: 50%;
-  height: 400px; }
-
-.map {
-  width: 100%;
-  height: 500px; }
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  height: 100vh; }
+  .content .container {
+    width: 50%; }
+    .content .container .weather {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-flow: column wrap;
+      flex-flow: column wrap;
+      position: relative; }
+      .content .container .weather .forecast {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: distribute;
+        justify-content: space-around; }
+    .content .container .weather::before {
+      content: '';
+      width: 90%;
+      height: 1px;
+      color: black;
+      position: absolute;
+      top: 0;
+      -webkit-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+      transform: rotate(180deg); }
