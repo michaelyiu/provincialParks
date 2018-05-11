@@ -74,6 +74,7 @@ parkApp.geolocation = (callback) => {
 parkApp.select = () => {
     $('#provParks').on('change', function () {
 
+        $('.content').css('display','flex');
         //smooth scroll
         $('html, body').animate({
             scrollTop: $('.content').offset().top
