@@ -147,11 +147,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pos1, po
     });
 }
 
-<<<<<<< HEAD
-parkApp.loadMap = (lat = 43.6565336, lng = -79.3910906) => {
-=======
-parkApp.loadMap = async (lat, lng) => {
->>>>>>> f3a26e83bca8190315925875e01bc30257a0fc93
+parkApp.loadMap = (lat, lng) => {
    const mapOptions = {
         center: {
             //enhaced object literal
@@ -163,7 +159,7 @@ parkApp.loadMap = async (lat, lng) => {
 
     const mapDiv = $('.map')[0];
 
-    parkApp.map = new google.maps.Map(mapDiv, mapOptions);
+    parkApp.map = new google.maps.Map(mapDiv, mapOptions.center);
     
 }
 
@@ -209,12 +205,7 @@ parkApp.displayCurrentWeather = (temp, feels, icon, iconDes, forecast, day1Day, 
 }
 
 
-<<<<<<< HEAD
-parkApp.getWeather = async (lat = 43.6565336, lng = -79.3910906) => {
-    // console.log(lat, lng, 'getweather');
-=======
 parkApp.getWeather = async (lat, lng) => {
->>>>>>> f3a26e83bca8190315925875e01bc30257a0fc93
     await $.ajax({
         url: `http://api.wunderground.com/api/7df53cd529eab04d/conditions/q/${lat},${lng}.json`,
         method: 'GET',
@@ -298,15 +289,16 @@ parkApp.init = () => {
     parkApp.loadMap();    
     parkApp.config();
     parkApp.select();
-<<<<<<< HEAD
-    // parkApp.getWeather();
-    // parkApp.displayCurrentWeather();
-    // parkApp.displayForecast();
-=======
->>>>>>> f3a26e83bca8190315925875e01bc30257a0fc93
     parkApp.displayInfo();
 
 }
+
+$('.back-to-top').on('click', function(){
+    $('html, body').animate({
+        scrollTop: $('header').offset().top
+    }, 1000);
+})
+
 
 $(function () {
     parkApp.init();
