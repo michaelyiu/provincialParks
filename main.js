@@ -1,5 +1,5 @@
-const parkApp = {};
-
+const parkApp = {
+};
 // //forEach array.name new array return as a new select 
 // 	//create option tag and push to select input that will already live in html 
 parkApp.displayList = () => {
@@ -34,6 +34,8 @@ parkApp.config = async () => {
         })
 
     parkApp.markers = null;
+    parkApp.directionsService = new google.maps.DirectionsService;
+    parkApp.directionsDisplay = new google.maps.DirectionsRenderer;
 
     await parkApp.geolocation();
     //call loadmap and loadweather with pseudo state variables 
@@ -75,8 +77,11 @@ parkApp.select = () => {
         //clearing the park marker each time a new park is selected
         if (parkApp.markers != null) {
             parkApp.markers.setMap(null);
-        }        
-
+        }
+        // if(parkApp.directionsDisplay != null)
+        // {
+        //     parkApp
+        // }
 
         const selectedPark = $(this).find(':selected').val();
         console.log(selectedPark);
@@ -110,13 +115,33 @@ parkApp.select = () => {
         let pos2 = new google.maps.LatLng(selectedParkInfo[0].Lat, selectedParkInfo[0].Lng)
            
         bounds.extend(pos1);
-        
         bounds.extend(pos2);
         
         parkApp.map.fitBounds(bounds);
+
+        
+        
+        parkApp.directionsDisplay.setMap(parkApp.map);
+        calculateAndDisplayRoute(parkApp.directionsService, parkApp.directionsDisplay, pos1, pos2);    
     })
 }
 
+function calculateAndDisplayRoute(directionsService, directionsDisplay, pos1, pos2) {
+    //if (directionsDisplay != null){
+      //  directionsDisplay.setMap(null);
+    //}
+    directionsService.route({
+        origin: pos1,
+        destination: pos2,
+        travelMode: 'DRIVING'
+    }, function (response, status) {
+        if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+        } else {
+            window.alert('Directions request failed due to ' + status);
+        }
+    });
+}
 // Define all variables, name, lat, lng, classification, opening day, closing day, notes, address, all from selected option
 
 
@@ -241,13 +266,13 @@ parkApp.getWeather = (lat = 43.6565336, lng = -79.3910906) => {
 
 parkApp.init = () => {
 
+    parkApp.loadMap();    
     parkApp.config();
     parkApp.select();
     parkApp.getWeather();
     parkApp.displayCurrentWeather();
     // parkApp.displayForecast();
     parkApp.displayInfo();
-    parkApp.loadMap();
 
 }
 
