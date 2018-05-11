@@ -74,6 +74,7 @@ parkApp.geolocation = (callback) => {
 parkApp.select = () => {
     $('#provParks').on('change', function () {
 
+        $('.content').css('display','flex');
         //smooth scroll
         $('html, body').animate({
             scrollTop: $('.content').offset().top
@@ -129,6 +130,28 @@ parkApp.select = () => {
         parkApp.directionsDisplay.setMap(parkApp.map);
         calculateAndDisplayRoute(parkApp.directionsService, parkApp.directionsDisplay, pos1, pos2);  
         
+        //back to top button
+        $('.back-to-top').on('click', function () {
+            $('html, body').animate({
+                scrollTop: $('header').offset().top
+            }, 1000);
+        })
+
+        //twiter widget 
+        window.twttr = (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0],
+                t = window.twttr || {};
+            if (d.getElementById(id)) return t;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+            t._e = [];
+            t.ready = function (f) {
+                t._e.push(f);
+            };
+            return t;
+        }(document, "script", "twitter-wjs"));
     })
 }
 
@@ -269,20 +292,6 @@ parkApp.getWeather = async (lat, lng) => {
 }
 
 //adding twitter widget 
-window.twttr = (function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0],
-        t = window.twttr || {};
-    if (d.getElementById(id)) return t;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "https://platform.twitter.com/widgets.js";
-    fjs.parentNode.insertBefore(js, fjs);
-    t._e = [];
-    t.ready = function (f) {
-        t._e.push(f);
-    };
-    return t;
-}(document, "script", "twitter-wjs"));
 
 parkApp.init = () => {
 
@@ -293,11 +302,7 @@ parkApp.init = () => {
 
 }
 
-$('.back-to-top').on('click', function(){
-    $('html, body').animate({
-        scrollTop: $('header').offset().top
-    }, 1000);
-})
+
 
 
 $(function () {

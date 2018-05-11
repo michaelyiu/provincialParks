@@ -146,7 +146,8 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   overflow: hidden; }
 
 body {
-  font-family: 'Raleway', sans-serif; }
+  font-family: 'Raleway', sans-serif;
+  font-size: 62.5%; }
 
 header {
   background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.3)), to(rgba(0, 0, 0, 0.5))), url(../hero.jpg);
@@ -185,20 +186,18 @@ header {
     align-items: center;
     color: white; }
     header .headerContainer h1 {
+      font-weight: 400;
+      font-size: 4.0rem;
+      text-shadow: 1px 1px black; }
+    header .headerContainer h2 {
       font-weight: 300;
-      font-size: 22px; }
-
-h2 {
-  font-weight: 300;
-  font-size: 18px; }
+      font-size: 1.7rem; }
 
 select {
   width: 50%; }
 
 .content {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -ms-flex-flow: row wrap;

@@ -1,5 +1,6 @@
 body {
 	font-family: 'Raleway', sans-serif;
+	font-size: 62.5%;
 }
 
 
@@ -24,25 +25,26 @@ header {
 		color: white;
 		
 		h1 {
+			font-weight: 400;
+			font-size: 4.0rem;
+			text-shadow: 1px 1px black;
+		}
+		h2 {
 			font-weight: 300;
-			font-size: 22px;
+			font-size: 1.7rem;
 		}
 	}
 }
 
 
 
-h2 {
-	font-weight: 300;
-	font-size: 18px;
-}
 
 select {
 	width: 50%;
 }
 
 .content {
-	display: flex;
+	display: none;
 	flex-flow: row wrap;
 	height: 100vh;
 
