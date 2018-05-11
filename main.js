@@ -145,7 +145,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pos1, po
 // Define all variables, name, lat, lng, classification, opening day, closing day, notes, address, all from selected option
 
 
-parkApp.loadMap = async (lat = 43.6565336, lng = -79.3910906) => {
+parkApp.loadMap = (lat = 43.6565336, lng = -79.3910906) => {
    const mapOptions = {
         center: {
             //enhaced object literal
@@ -201,9 +201,9 @@ parkApp.displayCurrentWeather = (temp, feels, icon, iconDes, forecast, day1Day, 
 }
 
 
-parkApp.getWeather = (lat = 43.6565336, lng = -79.3910906) => {
+parkApp.getWeather = async (lat = 43.6565336, lng = -79.3910906) => {
     // console.log(lat, lng, 'getweather');
-    $.ajax({
+    await $.ajax({
         url: `http://api.wunderground.com/api/7df53cd529eab04d/conditions/q/${lat},${lng}.json`,
         method: 'GET',
         dataType: 'json'
@@ -218,13 +218,14 @@ parkApp.getWeather = (lat = 43.6565336, lng = -79.3910906) => {
     })
 
     //retrieving forecast 
-    $.ajax({
+    await $.ajax({
         url: `http://api.wunderground.com/api/7df53cd529eab04d/forecast/q/${lat},${lng}.json`,
         method: 'GET',
         dataType: 'json' 
     }).then((res2) => {
         console.log(res2)
         //forecast day 1
+        
         const day1 = res2.forecast.simpleforecast.forecastday[1];
         const day1Day = day1.date.weekday_short;
         const day1Month = day1.date.monthname;
@@ -269,8 +270,8 @@ parkApp.init = () => {
     parkApp.loadMap();    
     parkApp.config();
     parkApp.select();
-    parkApp.getWeather();
-    parkApp.displayCurrentWeather();
+    // parkApp.getWeather();
+    // parkApp.displayCurrentWeather();
     // parkApp.displayForecast();
     parkApp.displayInfo();
 
