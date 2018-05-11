@@ -147,7 +147,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pos1, po
     });
 }
 
-parkApp.loadMap = async (lat, lng) => {
+parkApp.loadMap = (lat, lng) => {
    const mapOptions = {
         center: {
             //enhaced object literal
@@ -159,7 +159,7 @@ parkApp.loadMap = async (lat, lng) => {
 
     const mapDiv = $('.map')[0];
 
-    parkApp.map = new google.maps.Map(mapDiv, mapOptions);
+    parkApp.map = new google.maps.Map(mapDiv, mapOptions.center);
     
 }
 
@@ -228,6 +228,7 @@ parkApp.getWeather = async (lat, lng) => {
     }).then((res2) => {
         console.log(res2)
         //forecast day 1
+        
         const day1 = res2.forecast.simpleforecast.forecastday[1];
         const day1Day = day1.date.weekday_short;
         const day1Month = day1.date.monthname;
@@ -291,6 +292,13 @@ parkApp.init = () => {
     parkApp.displayInfo();
 
 }
+
+$('.back-to-top').on('click', function(){
+    $('html, body').animate({
+        scrollTop: $('header').offset().top
+    }, 1000);
+})
+
 
 $(function () {
     parkApp.init();
