@@ -8,11 +8,12 @@ body {
   display: flex; }
 
 .content {
-  display: block;
+  display: none;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -ms-flex-flow: row wrap;
   flex-flow: row wrap;
+  min-height: 100vh;
   font-weight: 300;
   background: white;
   width: 50%; }
@@ -51,15 +52,83 @@ body {
       margin: 0 auto;
       border-bottom: 1px solid black; }
 
-@media (max-width: 1000px) {
-  .content {
+h1 {
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+  font-weight: 500; }
+
+h2 {
+  font-size: 1.4rem;
+  font-weight: 300;
+  letter-spacing: 1px; }
+
+h3 {
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  font-weight: 300; }
+
+.container {
+  width: 50%;
+  padding: 0 30px; }
+  .container .parkInfo::after {
+    content: '';
+    width: 80%;
+    height: 1px;
+    color: grey;
+    position: absolute; }
+  .container .weather {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: column wrap;
+    flex-flow: column wrap;
+    position: relative; }
+    .container .weather .currentWeather {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: start;
+      -ms-flex-pack: start;
+      justify-content: flex-start;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center; }
+      .container .weather .currentWeather img {
+        width: 15%; }
+      .container .weather .currentWeather .currentWeatherContainer {
+        -ms-flex-preferred-size: 50%;
+        flex-basis: 50%;
+        padding-left: 30px; }
+        .container .weather .currentWeather .currentWeatherContainer a {
+          color: black;
+          font-size: 0.9rem; }
+        .container .weather .currentWeather .currentWeatherContainer a:hover {
+          color: #EA4335; }
+    .container .weather .forecastContainer {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content: space-between; }
+
+@media screen and (max-width: 1000px) {
+  header .headerContainer {
+    width: 100%; }
+    header .headerContainer #provParks {
+      width: 95%; }
+  main .content {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-flow: column;
     flex-flow: column;
-    width: 100%; }
-    .content .container {
+    min-height: 100%; }
+    main .content .container {
       width: 100%; }
-    .content #map {
+    main .content #map {
       width: 100%;
-      height: 500px; } }
+      min-height: 500px;
+      bottom: 0;
+      overflow: visible; } }
