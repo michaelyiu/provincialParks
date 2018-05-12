@@ -210,7 +210,7 @@ parkApp.displayCurrentWeather = (temp, feels, icon, iconDes, forecast, day1Day, 
         </div>
         <div class="forecast">
             <h2>3 Day Forecast</h2>
-           <div class= "forecastWrapper">
+           <div class= "forecast">
                 <div class="day1 day">
                     <h2>${day1Day}, ${day1Month}, ${day1Date}</h2> 
                     <h2>${day1Conditions}, ${day1Pop}, ${day1Hum}</h2>

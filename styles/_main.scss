@@ -7,16 +7,28 @@ body {
 	display: none;
 	flex-flow: row wrap;
 	height: 100vh;
+	font-weight: 300;
+
+	h1 {
+		font-size: 1.5rem;
+		font-weight: 400;
+	}
+
+	h2 {
+		font-size: 1.1rem;
+		font-weight: 300;
+	}
 
 	.container {
 		width: 50%;
+		// margin: 30px;
 	
 		.weather {
 			display: flex;
 			flex-flow: column wrap;
 			position: relative;
 
-			.forecast {
+			.forecastContainer {
 				display: flex;
 				justify-content: space-around;
 			}
