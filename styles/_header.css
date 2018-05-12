@@ -1,0 +1,52 @@
+header {
+  background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.3)), to(rgba(0, 0, 0, 0.5))), url(../hero.jpg);
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../hero.jpg);
+  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../hero.jpg);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../hero.jpg);
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+  header .headerContainer {
+    width: 70%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: white; }
+    header .headerContainer h1 {
+      font-weight: 500;
+      font-size: 4.0rem;
+      text-shadow: 1px 1px black; }
+    header .headerContainer h2 {
+      font-weight: 300;
+      font-size: 1.5rem;
+      margin: 25px 0 45px; }
+    header .headerContainer #provParks {
+      font-size: 0.9rem;
+      width: 40%;
+      border: 0 !important;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background: url(../downChevron.svg) white no-repeat 100% 0%;
+      padding: 8px 10px;
+      border-radius: none; }
