@@ -1,4 +1,6 @@
 $red: #EA4335;
+$lightblue: #e6f7ff;
+$black: #333333;
 
 body {
 	font-family: 'Raleway', sans-serif;
@@ -15,7 +17,7 @@ body {
 	flex-flow: row wrap;
 	min-height: 100vh;
 	font-weight: 300;
-	background: white;
+	// background:$lightblue;
 
 	h1 {
 		font-size: 1.8rem;
@@ -37,60 +39,81 @@ body {
 
 	.container {
 		width: 50%;
-		padding: 0 30px; 			
-
-		.parkInfo::after {
-			content: '';
-			width: 80%;
-			height: 1px;
-			color: grey;
-			position: absolute;
+		padding: 0 50px; 
+		
+		.parkInfo {
+			padding: 30px 0;
 		}
 
+		.weather::before, .forecast::before {
+			content: '';
+			width: 100%;
+			height: 1px;
+			background: $black;
+			position: absolute;
+			top: 0;
+			box-shadow: 0.1px 1px 1px $black;
+		}
 		.weather {
+			padding: 30px 0;
 			display: flex;
 			flex-flow: column wrap;
 			position: relative;
 			
 			.currentWeather {
 				display: flex;
-				justify-content: flex-start;
+				justify-content: space-around;
 				align-items: center;
-
+				
 				img {
 					width: 15%;
+					align-content: center;
 				}
 				
 				.currentWeatherContainer {
 					flex-basis: 50%;
 					padding-left: 30px;
-
+					
 					a {
 						color: black;
 						font-size: 0.9rem;
 					}
-
+					
 					a:hover {
 						color: $red;
 					}
 				}
 			}
-			.forecastContainer {
-				display: flex;
-				justify-content: space-between;
-			}
 
+			.forecast {
+				position: relative; 
+				padding-top: 30px;
+
+				.forecastContainer {
+					display: flex;
+					justify-content: space-between;
+				
+					.date {
+						font-weight: 400;
+					}
+				}
+			}
+		}
+		.social {
+			padding-bottom: 30px;
 		}
 
-		// .weather::before {
-		// 	content: '';
-		// 	width: 90%;
-		// 	height: 1px;
-		// 	color: black;
-		// 	position: absolute;
-		// 	top: 0;
-		// 	transform: rotate(180deg);
-		// }
+		.back-to-top {
+			font-size: 0.9rem;
+
+			i {
+				margin-left: 15px;
+			}
+		}
+
+		.back-to-top:hover {
+			color: $red;
+		}
 	}
 }
 
@@ -99,11 +122,6 @@ body {
 
 		.headerContainer {
 			width: 100%;
-
-			#provParks {
-				width: 95%;
-			}
-
 		}
 	}
 	
@@ -123,6 +141,31 @@ body {
 				overflow: visible;
 			}
 		}
+	}
+}
+
+@media (max-width: 770px) {
+	header {
+
+		.headerContainer {
+
+			#provParks {
+				width: 80%;
+			}
+
+		}
+	}
+}
+
+@media (max-width: 414px) {
+
+	.content h2 {
+		text-align: center;
+	}
+
+	.content .container .weather .forecast .forecastContainer {
+		flex-direction: column;
+		align-items: center;
 	}
 }
 
