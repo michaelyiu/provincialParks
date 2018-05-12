@@ -189,7 +189,7 @@ parkApp.loadMap = (lat, lng) => {
 parkApp.displayInfo = (name = 'please select a park', address = '', contact = '', classification = '', opening = '', closing = '', notes = '') => {
     $('.parkInfo').html(`
 			<h1>${name}</h1>
-			<h2>Address: ${address}</h2>
+			<h2>${address}</h2>
 			<h3>Contact Info: ${contact}</h3>
 			<h3>Classification: ${classification}</h3>
 			<h3>Opening Day: ${opening}</h3>
@@ -213,22 +213,22 @@ parkApp.displayCurrentWeather = (temp, feels, icon, iconDes, forecast, day1Day, 
         <div class="forecast">
             <h2>3 Day Forecast</h2>
             <div class=forecastContainer>
-                <div class="day1">
-                    <h3>${day1Day}, ${day1Month}, ${day1Date}</h3> 
+                <div class="day1 day">
+                    <h3 class="date">${day1Day}, ${day1Month}, ${day1Date}</h3> 
                     <h3>Conditions: ${day1Conditions}</h3>
                     <img src="${day1iconURL}" alt="${day1icon}"/> 
                     <h3> POP: ${day1Pop}%</h3>
                     <h3> Relative Humidity: ${day1Hum}%</h3>
                 </div>
-                <div className="day2">
-                    <h3>${day2Day}, ${day2Month}, ${day2Date}</h3> 
+                <div className="day2 day">
+                    <h3 class="date">${day2Day}, ${day2Month}, ${day2Date}</h3> 
                     <h3>Conditions: ${day2Conditions}</h3>
                     <img src="${day2iconURL}" alt="${day2icon}"/> 
                     <h3>POP: ${day2Pop}%</h3> 
                     <h3>Relative Humidity: ${day2Hum}%</h3>
                 </div>
                 <div className="day3">
-                    <h3>${day3Day}, ${day3Month}, ${day3Date}</h3> 
+                    <h3 class="date">${day3Day}, ${day3Month}, ${day3Date}</h3> 
                     <h3>Conditions: ${day3Conditions}</h3>
                     <img src="${day3iconURL}" alt="${day3icon}"/> 
                     <h3>POP: ${day3Pop}%</h3> 
