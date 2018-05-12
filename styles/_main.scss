@@ -12,29 +12,54 @@ body {
 	display: none;
 	flex-flow: row wrap;
 	height: 100vh;
+	font-weight: 300;
+	background: white;
+
+	h1 {
+		font-size: 1.8rem;
+		font-weight: 400;
+	}
+
+	h2 {
+		font-size: 1.1rem;
+		font-weight: 300;
+	}
+
+	h3 {
+		font-size: 0.9rem;
+		font-weight: 300;
+	}
 
 	.container {
 		width: 50%;
+		padding: 0 30px;			
+
 		.weather {
 			display: flex;
 			flex-flow: column wrap;
 			position: relative;
 
-			.forecast {
+			.forecastContainer {
 				display: flex;
-				justify-content: space-around;
+				justify-content: space-between;
 			}
 		}
 
-		.weather::before {
-			content: '';
-			width: 90%;
-			height: 1px;
-			color: black;
-			position: absolute;
-			top: 0;
-			transform: rotate(180deg);
+		.social {
+			width: 80%;
+			margin: 0 auto;
+			border-bottom: 1px solid black;
 		}
+
+		// .weather::before {
+		// 	content: '';
+		// 	width: 90%;
+		// 	height: 1px;
+		// 	color: black;
+		// 	position: absolute;
+		// 	top: 0;
+		// 	transform: rotate(180deg);
+		// }
 	}
 }
 
