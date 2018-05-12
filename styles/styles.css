@@ -151,7 +151,7 @@ header {
   background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../hero.jpg);
   background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../hero.jpg);
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../hero.jpg);
-  height: 100vh;
+  min-height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -196,6 +196,9 @@ header {
       border: 0 !important;
       -webkit-appearance: none;
       -moz-appearance: none;
+      text-indent: 0.01px;
+      -o-text-overflow: "";
+      text-overflow: "";
       background: url(../downChevron.svg) white no-repeat 100% 0%;
       padding: 8px 10px;
       border-radius: none; }
@@ -217,7 +220,7 @@ body {
   flex-flow: row wrap;
   min-height: 100vh;
   font-weight: 300;
-  background: white; }
+  background: #e6f7ff; }
   .content h1 {
     font-size: 1.8rem;
     letter-spacing: 2px;

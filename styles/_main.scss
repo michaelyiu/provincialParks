@@ -1,4 +1,5 @@
 $red: #EA4335;
+$lightblue: #e6f7ff;
 
 body {
 	font-family: 'Raleway', sans-serif;
@@ -15,7 +16,7 @@ body {
 	flex-flow: row wrap;
 	min-height: 100vh;
 	font-weight: 300;
-	background: white;
+	background:$lightblue;
 
 	h1 {
 		font-size: 1.8rem;
