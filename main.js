@@ -190,7 +190,7 @@ parkApp.displayInfo = (name = 'please select a park', address = '', contact = ''
     $('.parkInfo').html(`
 			<h1>${name}</h1>
 			<h2>Address: ${address}</h2>
-			<h2>Contact Info: ${contact}</h2>
+			<h3>Contact Info: ${contact}</h3>
 			<h3>Classification: ${classification}</h3>
 			<h3>Opening Day: ${opening}</h3>
 			<h3>Closing Day: ${closing}</h3>
@@ -201,12 +201,14 @@ parkApp.displayInfo = (name = 'please select a park', address = '', contact = ''
 parkApp.displayCurrentWeather = (temp, feels, icon, iconDes, forecast, day1Day, day1Month, day1Date, day1Conditions, day1Pop, day1Hum, day1icon, day1iconURL, day2Day, day2Month, day2Date, day2Pop, day2Conditions, day2Hum, day2icon, day2iconURL, day3Day, day3Month, day3Date, day3Pop, day3Conditions, day3Hum, day3icon, day3iconURL) => {
     $('#weather').empty();
     $('#weather').append(`
+    <h2>Current Weather</h2>
         <div class="currentWeather">
-            <h2>Current Weather</h2>
-		    <h3>Currently: ${temp}°C</h3>
-    		<h3>Feels Like: ${feels}°C</h3>
-    		<img src="${icon}" alt="${iconDes}" />
-    		<a href="${forecast}">See full forecast here</a>
+            <img src="${icon}" alt="${iconDes}" />
+            <div class="currentWeatherContainer">
+    		    <h3>Currently: ${temp}°C</h3>
+        		<h3>Feels Like: ${feels}°C</h3>
+        		<a href="${forecast}">See full forecast here</a>
+            </div>
         </div>
         <div class="forecast">
             <h2>3 Day Forecast</h2>
