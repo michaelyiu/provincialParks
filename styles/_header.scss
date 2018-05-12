@@ -1,6 +1,6 @@
 header {
 	background-image: linear-gradient(to right, rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url(../hero.jpg);
-	height: 100vh;
+	height: 100%;
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
@@ -19,7 +19,7 @@ header {
 		
 		h1 {
 			font-weight: 500;
-			font-size: 4.0rem;
+			font-size: 4.5rem;
 			text-shadow: 1px 1px black;
 		}
 
@@ -30,6 +30,7 @@ header {
 		}
 
 		#provParks {
+            text-align: center;
 			font-size: 0.9rem;
 			width: 40%;
 			border: 0 !important;  

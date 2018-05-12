@@ -182,13 +182,14 @@ header {
     color: white; }
     header .headerContainer h1 {
       font-weight: 500;
-      font-size: 4.0rem;
+      font-size: 4.5rem;
       text-shadow: 1px 1px black; }
     header .headerContainer h2 {
       font-weight: 300;
       font-size: 1.5rem;
       margin: 25px 0 45px; }
     header .headerContainer #provParks {
+      text-align: center;
       font-size: 0.9rem;
       width: 40%;
       border: 0 !important;
@@ -202,15 +203,32 @@ body {
   font-family: 'Raleway', sans-serif;
   font-size: 62.5%; }
 
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+
 .content {
   display: none;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -ms-flex-flow: row wrap;
   flex-flow: row wrap;
-  height: 100vh; }
+  height: 100vh;
+  font-weight: 300;
+  background: white; }
+  .content h1 {
+    font-size: 1.8rem;
+    font-weight: 400; }
+  .content h2 {
+    font-size: 1.1rem;
+    font-weight: 300; }
+  .content h3 {
+    font-size: 0.9rem;
+    font-weight: 300; }
   .content .container {
-    width: 50%; }
+    width: 50%;
+    padding: 0 30px; }
     .content .container .weather {
       display: -webkit-box;
       display: -ms-flexbox;
@@ -220,19 +238,21 @@ body {
       -ms-flex-flow: column wrap;
       flex-flow: column wrap;
       position: relative; }
-      .content .container .weather .forecast {
+      .content .container .weather .forecastContainer {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
-        -ms-flex-pack: distribute;
-        justify-content: space-around; }
-    .content .container .weather::before {
-      content: '';
-      width: 90%;
-      height: 1px;
-      color: black;
-      position: absolute;
-      top: 0;
-      -webkit-transform: rotate(180deg);
-      -ms-transform: rotate(180deg);
-      transform: rotate(180deg); }
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between; }
+    .content .container .social {
+      width: 80%;
+      margin: 0 auto;
+      border-bottom: 1px solid black; }
+
+@media screen and (max-width: 1000px) {
+  .content {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: column wrap;
+    flex-flow: column wrap; } }

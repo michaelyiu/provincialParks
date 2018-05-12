@@ -3,7 +3,7 @@ header {
   background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../hero.jpg);
   background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../hero.jpg);
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../hero.jpg);
-  height: 100vh;
+  height: 100%;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -35,13 +35,14 @@ header {
     color: white; }
     header .headerContainer h1 {
       font-weight: 500;
-      font-size: 4.0rem;
+      font-size: 4.5rem;
       text-shadow: 1px 1px black; }
     header .headerContainer h2 {
       font-weight: 300;
       font-size: 1.5rem;
       margin: 25px 0 45px; }
     header .headerContainer #provParks {
+      text-align: center;
       font-size: 0.9rem;
       width: 40%;
       border: 0 !important;
