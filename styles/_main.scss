@@ -3,46 +3,6 @@ body {
 	font-size: 62.5%;
 }
 
-
-header {
-	background-image: linear-gradient(to right, rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url(../hero.jpg);
-	height: 100vh;
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
-	.headerContainer {
-		width: 70%;
-		height: 70vh;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		color: white;
-		
-		h1 {
-			font-weight: 400;
-			font-size: 4.0rem;
-			text-shadow: 1px 1px black;
-		}
-		h2 {
-			font-weight: 300;
-			font-size: 1.7rem;
-		}
-	}
-}
-
-
-
-
-select {
-	width: 50%;
-}
-
 .content {
 	display: none;
 	flex-flow: row wrap;

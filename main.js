@@ -201,28 +201,32 @@ parkApp.displayInfo = (name = 'please select a park', address = '', contact = ''
 parkApp.displayCurrentWeather = (temp, feels, icon, iconDes, forecast, day1Day, day1Month, day1Date, day1Conditions, day1Pop, day1Hum, day1icon, day1iconURL, day2Day, day2Month, day2Date, day2Pop, day2Conditions, day2Hum, day2icon, day2iconURL, day3Day, day3Month, day3Date, day3Pop, day3Conditions, day3Hum, day3icon, day3iconURL) => {
     $('#weather').empty();
     $('#weather').append(`
-		<div class="currentWeather">
-		    <h2>currently ${temp}</h2>
-    		<h2>feels like ${feels}</h2>
+        <div class="currentWeather">
+            <h2>Currently</h2>
+		    <h3>currently ${temp}°C</h3>
+    		<h3>feels like ${feels}°C</h3>
     		<img src="${icon}" alt="${iconDes}" />
     		<a href="${forecast}">See full forecast here</a>
         </div>
         <div class="forecast">
-            <div class="day1">
-                <h2>${day1Day}, ${day1Month}, ${day1Date}</h2> 
-                <h2>${day1Conditions}, ${day1Pop}, ${day1Hum}</h2>
-                <img src="${day1iconURL}" alt="${day1icon}"/> 
-            </div>
-            <div className="day2">
-                <h2>${day2Day}, ${day2Month}, ${day2Date}</h2> 
-                <h2>${day2Conditions}, ${day2Pop}, ${day2Hum}</h2>
-                <img src="${day2iconURL}" alt="${day2icon}"/> 
-            </div>
-            <div className="day3">
-                <h2>${day3Day}, ${day3Month}, ${day3Date}</h2> 
-                <h2>${day3Conditions}, ${day3Pop}, ${day3Hum}</h2>
-                <img src="${day3iconURL}" alt="${day3icon}"/>  
-            </div>
+            <h2>3 Day Forecast</h2>
+           <div class= "forecastWrapper">
+                <div class="day1 day">
+                    <h2>${day1Day}, ${day1Month}, ${day1Date}</h2> 
+                    <h2>${day1Conditions}, ${day1Pop}, ${day1Hum}</h2>
+                    <img src="${day1iconURL}" alt="${day1icon}"/> 
+                </div>
+                <div className="day2 day">
+                    <h2>${day2Day}, ${day2Month}, ${day2Date}</h2> 
+                    <h2>${day2Conditions}, ${day2Pop}, ${day2Hum}</h2>
+                    <img src="${day2iconURL}" alt="${day2icon}"/> 
+                </div>
+                <div className="day3 day">
+                    <h2>${day3Day}, ${day3Month}, ${day3Date}</h2> 
+                    <h2>${day3Conditions}, ${day3Pop}, ${day3Hum}</h2>
+                    <img src="${day3iconURL}" alt="${day3icon}"/>  
+                </div>
+           </div>
         </div>
 		`)
 }

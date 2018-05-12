@@ -145,10 +145,6 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   clip: rect(0 0 0);
   overflow: hidden; }
 
-body {
-  font-family: 'Raleway', sans-serif;
-  font-size: 62.5%; }
-
 header {
   background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.3)), to(rgba(0, 0, 0, 0.5))), url(../hero.jpg);
   background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../hero.jpg);
@@ -170,7 +166,6 @@ header {
   align-items: center; }
   header .headerContainer {
     width: 70%;
-    height: 70vh;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -186,15 +181,26 @@ header {
     align-items: center;
     color: white; }
     header .headerContainer h1 {
-      font-weight: 400;
+      font-weight: 500;
       font-size: 4.0rem;
       text-shadow: 1px 1px black; }
     header .headerContainer h2 {
       font-weight: 300;
-      font-size: 1.7rem; }
+      font-size: 1.5rem;
+      margin: 25px 0 45px; }
+    header .headerContainer #provParks {
+      font-size: 0.9rem;
+      width: 40%;
+      border: 0 !important;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background: url(../downChevron.svg) white no-repeat 100% 0%;
+      padding: 8px 10px;
+      border-radius: none; }
 
-select {
-  width: 50%; }
+body {
+  font-family: 'Raleway', sans-serif;
+  font-size: 62.5%; }
 
 .content {
   display: none;
