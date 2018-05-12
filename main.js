@@ -75,6 +75,7 @@ parkApp.select = () => {
     $('#provParks').on('change', function () {
 
         $('.content').css('display','flex');
+        // $('.content')  
         //smooth scroll
         $('html, body').animate({
             scrollTop: $('.content').offset().top
