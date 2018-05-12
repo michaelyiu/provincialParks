@@ -3,6 +3,11 @@ body {
 	font-size: 62.5%;
 }
 
+//flex for content
+.flex{
+	display: flex;
+}
+
 .content {
 	display: none;
 	flex-flow: row wrap;
@@ -10,7 +15,6 @@ body {
 
 	.container {
 		width: 50%;
-	
 		.weather {
 			display: flex;
 			flex-flow: column wrap;
@@ -32,8 +36,11 @@ body {
 			transform: rotate(180deg);
 		}
 	}
-
 }
 
-
+@media screen and (max-width: 1000px){
+	.content{
+		flex-flow: column wrap;
+	}
+}
 
