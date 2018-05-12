@@ -113,9 +113,9 @@ parkApp.select = () => {
         //making both markers appear on the same window 
         let bounds = new google.maps.LatLngBounds();
         
-        let markers = [
-            parkApp.geolocationMarker,
-            parkApp.markers];
+        // let markers = [
+        //     parkApp.geolocationMarker,
+        //     parkApp.markers];
             
         let pos1 = new google.maps.LatLng(parkApp.latitude, parkApp.longitude); 
         let pos2 = new google.maps.LatLng(selectedParkInfo[0].Lat, selectedParkInfo[0].Lng)
