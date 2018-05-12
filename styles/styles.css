@@ -236,7 +236,7 @@ body {
     width: 50%;
     padding: 0 50px; }
     .content .container .parkInfo {
-      padding-bottom: 30px; }
+      padding: 30px 0; }
     .content .container .weather::before, .content .container .forecast::before {
       content: '';
       width: 100%;
@@ -260,14 +260,15 @@ body {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        justify-content: center;
+        -ms-flex-pack: distribute;
+        justify-content: space-around;
         -webkit-box-align: center;
         -ms-flex-align: center;
         align-items: center; }
         .content .container .weather .currentWeather img {
-          width: 15%; }
+          width: 15%;
+          -ms-flex-line-pack: center;
+          align-content: center; }
         .content .container .weather .currentWeather .currentWeatherContainer {
           -ms-flex-preferred-size: 50%;
           flex-basis: 50%;
@@ -278,7 +279,8 @@ body {
           .content .container .weather .currentWeather .currentWeatherContainer a:hover {
             color: #EA4335; }
       .content .container .weather .forecast {
-        position: relative; }
+        position: relative;
+        padding-top: 30px; }
         .content .container .weather .forecast .forecastContainer {
           display: -webkit-box;
           display: -ms-flexbox;
@@ -291,9 +293,9 @@ body {
     .content .container .social {
       padding-bottom: 30px; }
     .content .container .back-to-top {
-      font-size: 0.8rem; }
+      font-size: 0.9rem; }
       .content .container .back-to-top i {
-        margin-left: 5px; }
+        margin-left: 15px; }
     .content .container .back-to-top:hover {
       color: #EA4335; }
 
