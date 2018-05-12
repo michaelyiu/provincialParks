@@ -75,7 +75,6 @@ parkApp.select = () => {
     $('#provParks').on('change', function () {
 
         $('.content').css('display','flex');
-        // $('.content')  
         //smooth scroll
         $('html, body').animate({
             scrollTop: $('.content').offset().top
@@ -203,31 +202,37 @@ parkApp.displayCurrentWeather = (temp, feels, icon, iconDes, forecast, day1Day, 
     $('#weather').empty();
     $('#weather').append(`
         <div class="currentWeather">
-            <h2>Currently</h2>
-		    <h3>currently ${temp}°C</h3>
-    		<h3>feels like ${feels}°C</h3>
+            <h2>Current Weather</h2>
+		    <h3>Currently: ${temp}°C</h3>
+    		<h3>Feels Like: ${feels}°C</h3>
     		<img src="${icon}" alt="${iconDes}" />
     		<a href="${forecast}">See full forecast here</a>
         </div>
         <div class="forecast">
             <h2>3 Day Forecast</h2>
-           <div class= "forecast">
-                <div class="day1 day">
-                    <h2>${day1Day}, ${day1Month}, ${day1Date}</h2> 
-                    <h2>${day1Conditions}, ${day1Pop}, ${day1Hum}</h2>
+            <div class=forecastContainer>
+                <div class="day1">
+                    <h3>${day1Day}, ${day1Month}, ${day1Date}</h3> 
+                    <h3>Conditions: ${day1Conditions}</h3>
                     <img src="${day1iconURL}" alt="${day1icon}"/> 
+                    <h3> POP: ${day1Pop}%</h3>
+                    <h3> Relative Humidity: ${day1Hum}%</h3>
                 </div>
-                <div className="day2 day">
-                    <h2>${day2Day}, ${day2Month}, ${day2Date}</h2> 
-                    <h2>${day2Conditions}, ${day2Pop}, ${day2Hum}</h2>
+                <div className="day2">
+                    <h3>${day2Day}, ${day2Month}, ${day2Date}</h3> 
+                    <h3>Conditions: ${day2Conditions}</h3>
                     <img src="${day2iconURL}" alt="${day2icon}"/> 
+                    <h3>POP: ${day2Pop}%</h3> 
+                    <h3>Relative Humidity: ${day2Hum}%</h3>
                 </div>
-                <div className="day3 day">
-                    <h2>${day3Day}, ${day3Month}, ${day3Date}</h2> 
-                    <h2>${day3Conditions}, ${day3Pop}, ${day3Hum}</h2>
-                    <img src="${day3iconURL}" alt="${day3icon}"/>  
+                <div className="day3">
+                    <h3>${day3Day}, ${day3Month}, ${day3Date}</h3> 
+                    <h3>Conditions: ${day3Conditions}</h3>
+                    <img src="${day3iconURL}" alt="${day3icon}"/> 
+                    <h3>POP: ${day3Pop}%</h3> 
+                    <h3>Relative Humidity: ${day3Hum}%</h3> 
                 </div>
-           </div>
+            </div>
         </div>
 		`)
 }

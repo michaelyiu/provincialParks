@@ -13,9 +13,10 @@ body {
 	flex-flow: row wrap;
 	height: 100vh;
 	font-weight: 300;
+	background: white;
 
 	h1 {
-		font-size: 1.5rem;
+		font-size: 1.8rem;
 		font-weight: 400;
 	}
 
@@ -24,13 +25,15 @@ body {
 		font-weight: 300;
 	}
 
+	h3 {
+		font-size: 0.9rem;
+		font-weight: 300;
+	}
+
 	.container {
 		width: 50%;
-<<<<<<< HEAD
-		// margin: 30px;
-	
-=======
->>>>>>> 9567b2908fb401614f6a97e43d2521fd25722032
+		padding: 0 30px;			
+
 		.weather {
 			display: flex;
 			flex-flow: column wrap;
@@ -38,19 +41,25 @@ body {
 
 			.forecastContainer {
 				display: flex;
-				justify-content: space-around;
+				justify-content: space-between;
 			}
 		}
 
-		.weather::before {
-			content: '';
-			width: 90%;
-			height: 1px;
-			color: black;
-			position: absolute;
-			top: 0;
-			transform: rotate(180deg);
+		.social {
+			width: 80%;
+			margin: 0 auto;
+			border-bottom: 1px solid black;
 		}
+
+		// .weather::before {
+		// 	content: '';
+		// 	width: 90%;
+		// 	height: 1px;
+		// 	color: black;
+		// 	position: absolute;
+		// 	top: 0;
+		// 	transform: rotate(180deg);
+		// }
 	}
 }
 

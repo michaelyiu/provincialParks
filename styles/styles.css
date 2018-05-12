@@ -203,6 +203,11 @@ body {
   font-family: 'Raleway', sans-serif;
   font-size: 62.5%; }
 
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+
 .content {
   display: none;
   -webkit-box-orient: horizontal;
@@ -210,15 +215,20 @@ body {
   -ms-flex-flow: row wrap;
   flex-flow: row wrap;
   height: 100vh;
-  font-weight: 300; }
+  font-weight: 300;
+  background: white; }
   .content h1 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: 400; }
   .content h2 {
     font-size: 1.1rem;
     font-weight: 300; }
+  .content h3 {
+    font-size: 0.9rem;
+    font-weight: 300; }
   .content .container {
-    width: 50%; }
+    width: 50%;
+    padding: 0 30px; }
     .content .container .weather {
       display: -webkit-box;
       display: -ms-flexbox;
@@ -232,15 +242,17 @@ body {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
-        -ms-flex-pack: distribute;
-        justify-content: space-around; }
-    .content .container .weather::before {
-      content: '';
-      width: 90%;
-      height: 1px;
-      color: black;
-      position: absolute;
-      top: 0;
-      -webkit-transform: rotate(180deg);
-      -ms-transform: rotate(180deg);
-      transform: rotate(180deg); }
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between; }
+    .content .container .social {
+      width: 80%;
+      margin: 0 auto;
+      border-bottom: 1px solid black; }
+
+@media screen and (max-width: 1000px) {
+  .content {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: column wrap;
+    flex-flow: column wrap; } }
