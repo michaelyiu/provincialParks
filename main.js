@@ -128,6 +128,8 @@ parkApp.select = () => {
         
         
         parkApp.directionsDisplay.setMap(parkApp.map);
+
+        
         calculateAndDisplayRoute(parkApp.directionsService, parkApp.directionsDisplay, pos1, pos2);  
         
         //back to top button

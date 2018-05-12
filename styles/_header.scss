@@ -1,7 +1,7 @@
 header {
     display:none;
 	background-image: linear-gradient(to right, rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url(../hero.jpg);
-	height: 100%;
+	min-height: 100vh;
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
@@ -35,8 +35,10 @@ header {
 			font-size: 0.9rem;
 			width: 40%;
 			border: 0 !important;  
-     		-webkit-appearance: none;  
-			-moz-appearance: none;
+            -webkit-appearance: none;  
+            -moz-appearance: none; 
+            text-indent: 0.01px;
+            text-overflow: "";
 			background: url(../downChevron.svg) white no-repeat 100% 0%; 
             padding: 8px 10px;
             border-radius: none;
