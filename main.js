@@ -256,7 +256,7 @@ parkApp.getWeather = async (lat, lng) => {
     })
 
     //retrieving forecast 
-    $.ajax({
+    await $.ajax({
         url: `http://api.wunderground.com/api/7df53cd529eab04d/forecast/q/${lat},${lng}.json`,
         method: 'GET',
         dataType: 'json' 
