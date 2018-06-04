@@ -101,7 +101,7 @@ parkApp.select = () => {
 
         parkApp.displayInfo(selectedParkInfo[0].Name, selectedParkInfo[0].Address, selectedParkInfo[0].Contact, selectedParkInfo[0].Classification, selectedParkInfo[0]['Opening Day'], selectedParkInfo[0]['Closing Day'], selectedParkInfo[0].Notes)
 
-        //defining the parks locaiton marker     
+        //defining the parks location marker     
         parkApp.markers = new google.maps.Marker({
             position: {
                 lat: selectedParkInfo[0].Lat,
@@ -242,7 +242,7 @@ parkApp.displayCurrentWeather = (temp, feels, icon, iconDes, forecast, day1Day, 
 
 parkApp.getWeather = async (lat, lng) => {
     await $.ajax({
-        url: `http://api.wunderground.com/api/7df53cd529eab04d/conditions/q/${lat},${lng}.json`,
+        url: `https://api.wunderground.com/api/7df53cd529eab04d/conditions/q/${lat},${lng}.json`,
         method: 'GET',
         dataType: 'json'
     }).then((res) => {
@@ -257,7 +257,7 @@ parkApp.getWeather = async (lat, lng) => {
 
     //retrieving forecast 
     await $.ajax({
-        url: `http://api.wunderground.com/api/7df53cd529eab04d/forecast/q/${lat},${lng}.json`,
+        url: `https://api.wunderground.com/api/7df53cd529eab04d/forecast/q/${lat},${lng}.json`,
         method: 'GET',
         dataType: 'json' 
     }).then((res2) => {
