@@ -1,6 +1,7 @@
 $red: #EA4335;
 $lightblue: #e6f7ff;
 $black: #333333;
+$grey: #666;
 
 body {
 	font-family: 'Raleway', sans-serif;
@@ -15,24 +16,25 @@ body {
 .content {
 	display: none;
 	flex-flow: row wrap;
-	min-height: 100vh;
+	height: 100vh;
 	font-weight: 300;
-	// background:$lightblue;
+	
 
 	h1 {
-		font-size: 1.8rem;
+		font-size: 1.9rem;
 		letter-spacing: 2px;
 		font-weight: 500;
 	}
 
 	h2 {
-		font-size: 1.4rem;
-		font-weight: 300;
+		font-size: 1.2rem;
+		font-weight: 400;
 		letter-spacing: 1px;
+		margin: 0 0 40px;
 	}
 
 	h3 {
-		letter-spacing: 1px;
+		letter-spacing: 1.1px;
 		font-size: 0.9rem;
 		font-weight: 300;
 	}
@@ -40,22 +42,37 @@ body {
 	.container {
 		width: 50%;
 		padding: 0 50px; 
+		position: relative;
 		
-		.parkInfo {
-			padding: 30px 0;
+		span {
+			font-weight: 500;
 		}
 
-		.weather::before, .forecast::before {
+		//Park Info Begins
+		.parkInfo {
+			padding: 30px 0;
+			
+			h1 {
+				margin-bottom: 0;
+			}
+
+			h2 {
+				margin-left: 5%;
+			}
+		}
+
+		//Weather Begins	
+		.weather::before, .forecastContainer::before {
 			content: '';
 			width: 100%;
 			height: 1px;
-			background: $black;
+			background: $grey;
 			position: absolute;
 			top: 0;
-			box-shadow: 0.1px 1px 1px $black;
 		}
+
 		.weather {
-			padding: 30px 0;
+			padding: 0;
 			display: flex;
 			flex-flow: column wrap;
 			position: relative;
@@ -64,12 +81,20 @@ body {
 				display: flex;
 				justify-content: space-around;
 				align-items: center;
+
 				
-				img {
-					width: 15%;
-					align-content: center;
-				}
+				.currentWeatherContainerImage {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					
+					img {
+						width: 100%;
+						align-content: center;
+					}
 				
+				}		
 				.currentWeatherContainer {
 					flex-basis: 50%;
 					padding-left: 30px;
@@ -85,89 +110,49 @@ body {
 				}
 			}
 
-			.forecast {
+			.forecastContainer {
+				display: none;
 				position: relative; 
 				padding-top: 30px;
 
-				.forecastContainer {
-					display: flex;
-					justify-content: space-between;
-				
+				.forecast {
+				display: flex;
+				justify-content: space-around;	
+
 					.date {
 						font-weight: 400;
 					}
 				}
-			}
+			}	
 		}
+
 		.social {
 			padding-bottom: 30px;
 		}
 
 		.back-to-top {
+			position: relative;
+			position: absolute;
 			font-size: 0.9rem;
+			right: 5%;
+			bottom: 5%;
+			background: $red;
+			color: white;
 
-			i {
-				margin-left: 15px;
+			p {
+				padding: 15px 18px;
+				margin: 0;
 			}
 		}
 
 		.back-to-top:hover {
-			color: $red;
+			color: $black;
 		}
 	}
 }
 
-@media screen and (max-width: 1000px) {
-	header {
 
-		.headerContainer {
-			width: 100%;
-		}
-	}
-	
-	main {
-		.content {
-			flex-flow: column;
-			min-height: 100%;
-			
-			.container {
-				width: 100%;
-			}
 
-			#map {
-				width: 100%;
-				min-height: 500px;
-				bottom: 0;
-				overflow: visible;
-			}
-		}
-	}
-}
-
-@media (max-width: 770px) {
-	header {
-
-		.headerContainer {
-
-			#provParks {
-				width: 80%;
-			}
-
-		}
-	}
-}
-
-@media (max-width: 414px) {
-
-	.content h2 {
-		text-align: center;
-	}
-
-	.content .container .weather .forecast .forecastContainer {
-		flex-direction: column;
-		align-items: center;
-	}
-}
 
 
 

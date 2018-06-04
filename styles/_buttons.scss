@@ -1,0 +1,23 @@
+button {
+    background: transparent;
+    border: none;
+}
+
+button:hover {
+    color: $red;
+}
+
+
+button.showForecast {
+    border: 1px solid $black;
+    font-size: 0.9rem;
+    padding: 5px 10px;
+}
+
+button.hideForecast {
+    font-size: 1.3rem;
+    position: absolute; 
+    right: 0;
+    top: 0;
+    padding: 10px;
+}
