@@ -38,7 +38,6 @@ parkApp.config = async () => {
     parkApp.directionsDisplay = new google.maps.DirectionsRenderer;
 
     await parkApp.geolocation();
-    //call loadmap and loadweather with pseudo state variables 
 }
 
 parkApp.geolocation = (callback) => {
@@ -84,11 +83,7 @@ parkApp.select = () => {
         if (parkApp.markers != null) {
             parkApp.markers.setMap(null);
         }
-        // if(parkApp.directionsDisplay != null)
-        // {
-        //     parkApp
-        // }
-
+       
         const selectedPark = $(this).find(':selected').val();
         console.log(selectedPark);
         const selectedParkInfo = parkApp.parks.filter((park) => {
@@ -101,7 +96,7 @@ parkApp.select = () => {
 
         parkApp.displayInfo(selectedParkInfo[0].Name, selectedParkInfo[0].Address, selectedParkInfo[0].Contact, selectedParkInfo[0].Classification, selectedParkInfo[0]['Opening Day'], selectedParkInfo[0]['Closing Day'], selectedParkInfo[0].Notes)
 
-        //defining the parks locaiton marker     
+        //defining the parks location marker     
         parkApp.markers = new google.maps.Marker({
             position: {
                 lat: selectedParkInfo[0].Lat,
@@ -123,14 +118,9 @@ parkApp.select = () => {
         bounds.extend(pos1);
         bounds.extend(pos2);
         
-        parkApp.map.fitBounds(bounds);
-
-        
-        
+        parkApp.map.fitBounds(bounds); 
         parkApp.directionsDisplay.setMap(parkApp.map);
-
-        
-        calculateAndDisplayRoute(parkApp.directionsService, parkApp.directionsDisplay, pos1, pos2);  
+        parkApp.calculateAndDisplayRoute(parkApp.directionsService, parkApp.directionsDisplay, pos1, pos2);  
         
         //back to top button
         $('.back-to-top').on('click', function () {
@@ -157,7 +147,7 @@ parkApp.select = () => {
     })
 }
 
-function calculateAndDisplayRoute(directionsService, directionsDisplay, pos1, pos2) {
+parkApp.calculateAndDisplayRoute = function(directionsService, directionsDisplay, pos1, pos2) {
 
     directionsService.route({
         origin: pos1,
@@ -190,134 +180,122 @@ parkApp.loadMap = (lat, lng) => {
 
 parkApp.displayInfo = (name = 'please select a park', address = '', contact = '', classification = '', opening = '', closing = '', notes = '') => {
     $('.parkInfo').html(`
-			<h1>${name}</h1>
-			<h2>Address: ${address}</h2>
-			<h3>Contact Info: ${contact}</h3>
-			<h3>Classification: ${classification}</h3>
-			<h3>Opening Day: ${opening}</h3>
-			<h3>Closing Day: ${closing}</h3>
-			<h3>Notes: ${notes}</h3>
-		`)
+        <h1>${name}</h1>
+        <h2>${address}</h2>
+        <h3><span>Contact Info:</span> ${contact}</h3>
+        <h3><span>Classification:</span> ${classification}</h3>
+        <h3><span>Opening Day:</span> ${opening}</h3>
+        <h3><span>Closing Day:</span> ${closing}</h3>
+        <h3><span>Notes:</span> ${notes}</h3>
+    `)
 }
 
-parkApp.displayCurrentWeather = (temp, feels, icon, iconDes, forecast, day1Day, day1Month, day1Date, day1Conditions, day1Pop, day1Hum, day1icon, day1iconURL, day2Day, day2Month, day2Date, day2Pop, day2Conditions, day2Hum, day2icon, day2iconURL, day3Day, day3Month, day3Date, day3Pop, day3Conditions, day3Hum, day3icon, day3iconURL) => {
+parkApp.displayCurrentWeather = () => {
     $('#weather').empty();
     $('#weather').append(`
-    <h2>Current Weather</h2>
-        <div class="currentWeather">
-            <img src="${icon}" alt="${iconDes}" />
-            <div class="currentWeatherContainer">
-    		    <h3>Currently: ${temp}°C</h3>
-        		<h3>Feels Like: ${feels}°C</h3>
-        		<a href="${forecast}">See full forecast here</a>
+    <h1 class="currentWeatherTitle">Current Weather</h1>
+    <div class="currentWeather">
+            <div class="currentWeatherContainerImage">
+                <h2>${parkApp.weather}</h2>
+                <img src="${parkApp.icon}" alt="${parkApp.iconDes}" />
             </div>
+        <div class="currentWeatherContainer">
+            <h3><span>Currently</span>: ${parkApp.temp}°C</h3>
+            <h3><span>Feels Like</span>: ${parkApp.feels}°C</h3>
+            <button class="showForecast">See 3 Day Forecast</button>
         </div>
-        <div class="forecast">
-            <h2>3 Day Forecast</h2>
-            <div class=forecastContainer>
-                <div class="day1">
-                    <h3>${day1Day}, ${day1Month}, ${day1Date}</h3> 
-                    <h3>Conditions: ${day1Conditions}</h3>
-                    <img src="${day1iconURL}" alt="${day1icon}"/> 
-                    <h3> POP: ${day1Pop}%</h3>
-                    <h3> Relative Humidity: ${day1Hum}%</h3>
-                </div>
-                <div className="day2">
-                    <h3>${day2Day}, ${day2Month}, ${day2Date}</h3> 
-                    <h3>Conditions: ${day2Conditions}</h3>
-                    <img src="${day2iconURL}" alt="${day2icon}"/> 
-                    <h3>POP: ${day2Pop}%</h3> 
-                    <h3>Relative Humidity: ${day2Hum}%</h3>
-                </div>
-                <div className="day3">
-                    <h3>${day3Day}, ${day3Month}, ${day3Date}</h3> 
-                    <h3>Conditions: ${day3Conditions}</h3>
-                    <img src="${day3iconURL}" alt="${day3icon}"/> 
-                    <h3>POP: ${day3Pop}%</h3> 
-                    <h3>Relative Humidity: ${day3Hum}%</h3> 
-                </div>
-            </div>
-        </div>
-		`)
+    </div>        
+    `)
+    $('.showForecast').on('click',() => {
+        $('.forecastContainer').show()
+        $('.currentWeather').hide()
+        $('.currentWeatherTitle').hide()
+    })
 }
 
+parkApp.displayForecast = (data) => {
+    const days = Object.keys(data)
+    .map((key) => {
+        const currentDay = data[key];
+        return `
+        <div class="${key} day">
+            <h3 class="date">${currentDay.day}, ${currentDay.month}, ${currentDay.date}</h3>
+            <h3>Conditions: ${currentDay.conditions}</h3>
+            <img src="${currentDay.iconURL}" alt="${currentDay.icon}" />
+            <h3> POP: ${currentDay.pop}%</h3>
+            <h3> Rel. Humidity: ${currentDay.hum}%</h3>
+        </div>    
+      `
+    })
+
+    $('#weather').append(`
+        <div class="forecastContainer">
+            <button class="hideForecast"><i class="fas fa-times"></i></button>
+            <h2>3 Day Forecast</h2>
+            <div class="forecast">
+                ${days.join('')}
+            </div>
+        </div>
+    `)
+
+    $('.hideForecast').on('click', () => {
+        $('.forecastContainer').hide()
+        $('.currentWeather').show()
+        $('.currentWeatherTitle').show()
+    })
+}
 
 parkApp.getWeather = async (lat, lng) => {
     await $.ajax({
-        url: `http://api.wunderground.com/api/7df53cd529eab04d/conditions/q/${lat},${lng}.json`,
+        url: `https://api.wunderground.com/api/7df53cd529eab04d/conditions/q/${lat},${lng}.json`,
         method: 'GET',
         dataType: 'json'
     }).then((res) => {
-        // console.log(res);
+        console.log(res)
         parkApp.feels = res.current_observation.feelslike_c
         parkApp.icon = res.current_observation.icon_url
         parkApp.iconDes = res.current_observation.icon
         parkApp.temp = res.current_observation.temp_c
         parkApp.forecast = res.current_observation.forecast_url
-        // parkApp.displayCurrentWeather(temp, feels, icon, iconDes, forecast);
+        parkApp.weather = res.current_observation.weather
     })
 
     //retrieving forecast 
-    $.ajax({
-        url: `http://api.wunderground.com/api/7df53cd529eab04d/forecast/q/${lat},${lng}.json`,
+    await $.ajax({
+        url: `https://api.wunderground.com/api/7df53cd529eab04d/forecast/q/${lat},${lng}.json`,
         method: 'GET',
         dataType: 'json' 
     }).then((res2) => {
-        console.log(res2)
-        //forecast day 1
-        
-        const day1 = res2.forecast.simpleforecast.forecastday[1];
-        const day1Day = day1.date.weekday_short;
-        const day1Month = day1.date.monthname;
-        const day1Date = day1.date.day;
-        const day1Conditions = day1.conditions;
-        const day1Pop = day1.pop;
-        const day1Hum = day1.avehumidity
-        const day1icon = day1.icon
-        const day1iconURL = day1.icon_url 
-        // console.log(day1Day, day1Month, day1Date, day1Conditions, day1Pop, day1Hum, day1icon, day1iconURL);
 
-        //forecast day 2 
-        const day2 = res2.forecast.simpleforecast.forecastday[2];
-        const day2Day = day2.date.weekday_short;
-        const day2Month = day2.date.monthname;
-        const day2Date = day2.date.day;
-        const day2Conditions = day2.conditions;
-        const day2Pop = day2.pop;
-        const day2Hum = day2.avehumidity
-        const day2icon = day2.icon
-        const day2iconURL = day2.icon_url 
-        // console.log(day2Day, day2Month, day2Date, day2Pop, day2Conditions, day2Hum, day2icon, day2iconURL);
+        const data = {}
 
-        //forecast day 3
-        const day3 = res2.forecast.simpleforecast.forecastday[3];
-        const day3Day = day3.date.weekday_short;
-        const day3Month = day3.date.monthname;
-        const day3Date = day3.date.day;
-        const day3Conditions = day3.conditions;
-        const day3Pop = day3.pop;
-        const day3Hum = day3.avehumidity
-        const day3icon = day3.icon
-        const day3iconURL = day3.icon_url
-        // console.log(day3Day, day3Month, day3Date, day3Pop, day3Conditions, day3Hum, day3icon, day3iconURL);
+        for(let i = 1; i < 4; i++) {
+            data[`day${i}`] === undefined ? data[`day${i}`] = {} : null ;
+            let currentDay = data[`day${i}`]
+            const forecast = res2.forecast.simpleforecast.forecastday[i]
+            
+            currentDay.day = forecast.date.weekday_short
+            currentDay.month = forecast.date.monthname
+            currentDay.date = forecast.date.day
+            currentDay.conditions = forecast.conditions
+            currentDay.pop = forecast.pop
+            currentDay.hum = forecast.avehumidity
+            currentDay.icon = forecast.icon
+            currentDay.iconURL = forecast.icon_url
+        }
 
-        parkApp.displayCurrentWeather(parkApp.temp, parkApp.feels, parkApp.icon, parkApp.iconDes, parkApp.forecast, day1Day, day1Month, day1Date, day1Conditions, day1Pop, day1Hum, day1icon, day1iconURL, day2Day, day2Month, day2Date, day2Pop, day2Conditions, day2Hum, day2icon, day2iconURL, day3Day, day3Month, day3Date, day3Pop, day3Conditions, day3Hum, day3icon, day3iconURL);
+        parkApp.displayCurrentWeather();
+        parkApp.displayForecast(data);
     })
 }
-
-//adding twitter widget 
-
+ 
 parkApp.init = () => {
-
-    parkApp.loadMap();    
+     parkApp.loadMap();    
     parkApp.config();
     parkApp.select();
     parkApp.displayInfo();
 
 }
-
-
-
 
 $(function () {
     parkApp.init();

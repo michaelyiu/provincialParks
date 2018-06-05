@@ -1,0 +1,96 @@
+@media screen and (max-width: 1000px) {
+	header {
+		.headerContainer {
+			width: 100%;
+		}
+	}
+	
+	main {
+		.content {
+			flex-flow: column;
+			min-height: 100%;
+			
+			.container {
+				width: 100%;
+			}
+
+			#map {
+				width: 100%;
+				min-height: 500px;
+				bottom: 0;
+				overflow: visible;
+			}
+		}
+	}
+}
+
+@media (max-width: 770px) {
+	header {
+
+		.headerContainer {
+
+			#provParks {
+				width: 80%;
+			}
+		}
+	}
+
+	.content .container .back-to-top {
+		bottom: 5%;
+		right: 5%;
+	}
+
+}
+
+@media (max-width: 520px) {
+
+	header .headerContainer {
+		h1 {
+			font-size: 4rem;
+		}
+
+		h2 {
+			font-size: 1.3rem;
+		}
+	}
+
+	.content h2, .content h1 {
+		text-align: center;
+	}
+
+	.content .container .weather .currentWeather {
+		flex-direction: column;
+		padding-bottom: 40px;
+
+		h2 {
+			margin: 0;
+		}
+
+		.currentWeatherContainer {
+			padding: 0;
+		}
+	}
+
+	.content .container .weather .forecastContainer .forecast  {
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		.day {
+			width: 70%;
+			margin: 0 auto;
+			padding-bottom: 10px;
+   			border-bottom: 1px solid;
+		}
+
+		.day:last-of-type {
+			padding: 0;
+			border: none;
+		}
+	}
+
+	.content .container .back-to-top {
+		display: none;
+	}
+}
+
