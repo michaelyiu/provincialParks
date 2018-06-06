@@ -147,10 +147,10 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 
 header {
   display: none;
-  background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.3)), to(rgba(0, 0, 0, 0.5))), url(../hero.jpg);
-  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../hero.jpg);
-  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../hero.jpg);
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../hero.jpg);
+  background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.3)), to(rgba(0, 0, 0, 0.5))), url(../heroOptimized.jpg);
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../heroOptimized.jpg);
+  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../heroOptimized.jpg);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../heroOptimized.jpg);
   min-height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
@@ -164,7 +164,8 @@ header {
   justify-content: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
-  align-items: center; }
+  align-items: center;
+  position: relative; }
   header .headerContainer {
     width: 70%;
     display: -webkit-box;
@@ -202,6 +203,14 @@ header {
       background: url(../downChevron.svg) white no-repeat 100% 0%;
       padding: 8px 10px;
       border-radius: 0; }
+    header .headerContainer p {
+      position: absolute;
+      bottom: 10px;
+      font-size: 0.8rem; }
+      header .headerContainer p a {
+        color: white;
+        font-size: 0.8rem;
+        text-decoration: none; }
 
 body {
   font-family: 'Raleway', sans-serif;
